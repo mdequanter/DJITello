@@ -6,6 +6,15 @@ Code to fly with a DJI Tello
 
 # DJI_tello_OpenCV_ColorObjectCenterRCCommands.py
 
+Selecting a color on a DJI Tello using the stream of the onboard tello camera.
+select the right color using the HSV values.  Once you isolated your color
+you can use the values that are printed in the terminal screen to set lower and upper values for your selected color
+based on SDK  https://djitellopy.readthedocs.io/en/latest/tello/
+For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/?ref=shm
+
+![image](https://user-images.githubusercontent.com/74420584/191464840-a5dcf857-8ad6-4756-80a1-da60b2b0f7a6.png)
+
+
 dependencies :  
 
 from djitellopy import Tello
@@ -21,4 +30,8 @@ based on SDK  https://djitellopy.readthedocs.io/en/latest/tello/
 For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/?ref=shm
 
 Demonstration :  https://youtu.be/bJMtfXjVxwc
+
+
+# DJI_tello_detectColors.py
+
 
