@@ -6,7 +6,6 @@ Code to fly with a DJI Tello
 
 
 
-
 # DJI_tello_OpenCV_ColorObjectCenterRCCommands.py
 
 dependencies :  
@@ -14,6 +13,8 @@ dependencies :
 from djitellopy import Tello
 import cv2, math, time
 import numpy as np
+
+![image](https://user-images.githubusercontent.com/74420584/191467167-d365271b-0329-44c2-98cb-5c19f1729c31.png)
 
 
 Demonstrating how to control a Tello using the stream of the onboard tello camera.
