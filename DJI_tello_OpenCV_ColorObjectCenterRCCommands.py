@@ -7,6 +7,10 @@
 # When starting the script the Tello will takeoff, pressing ESC makes it land
 # and the script exit.
 # based on SDK  https://djitellopy.readthedocs.io/en/latest/tello/
+# For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/?ref=shm
+
+# author Maarten Dequanter
+# date 21/09/2022
 
 
 onlyCamera = False   # set false if you want to fly, True if only camera
@@ -23,6 +27,7 @@ tello.connect()
 
 
 minBattery = 20
+moveSpeed = 10
 
 battery = tello.get_battery()
 
@@ -36,6 +41,7 @@ frame_read = tello.get_frame_read()
 img = frame_read.frame
 
 
+
 frameHeight = img.shape[0]
 frameWidth = img.shape[1]
 print('Frame Height       : ',frameHeight)
@@ -44,6 +50,7 @@ print('Frame Width        : ',frameWidth)
 
 distance = 20
 minArea = 20
+marge = 80
 
 
 lower_Blue = np.array([100, 100, 50])
@@ -98,16 +105,16 @@ def doMove(command):
     if (onlyCamera == False) :
 
         if (command == "F") :
-            tello.send_rc_control(0, -10, 0, 0)
+            tello.send_rc_control(0, -moveSpeed, 0, 0)
 
         if (command == "B") :
-            tello.send_rc_control(0, 10, 0, 0)
+            tello.send_rc_control(0, moveSpeed, 0, 0)
 
         if (command == "R") :
-            tello.send_rc_control(10, 0, 0, 0)
+            tello.send_rc_control(moveSpeed, 0, 0, 0)
 
         if (command == "L") :
-            tello.send_rc_control(-10, 0, 0, 0)
+            tello.send_rc_control(-moveSpeed, 0, 0, 0)
 
         if (command == "LAND") :
             tello.land()
@@ -117,8 +124,40 @@ def doMove(command):
         if (command == "TAKEOFF") :
             tello.takeoff()
 
-        if (command == "TAKEOFF") :
-            tello.move_up(30)   
+        if (command == "MOVEUP") :
+            tello.move_up(60)   
+
+
+def setMarkers(img, battery):
+
+    # Monitor battery level on top center of screen
+    text = "Battery: {}%".format(battery)
+    cv2.putText(img,text, (int(frameWidth/2)-80, 20),
+        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        
+
+    # draw coordinates on screen to make it easy to navigate
+    text = "x: 0, y:0"
+    cv2.putText(img, text, (5, 20),
+        cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 2)
+    text = "x: " + str(frameWidth) +", y:0"
+    cv2.putText(img, text, (frameWidth-120, 20),
+        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    text = "x: 0, y:" + str(frameHeight)
+    cv2.putText(img, text, (5, frameHeight-10),
+        cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 2)
+    text = "x: " + str(frameWidth) +", y:" + str(frameHeight)
+    cv2.putText(img, text, (frameWidth-120, frameHeight-10),
+        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+    # draw a box in center of 100x100px
+    x1 = int((frameWidth/2)-50)
+    y1 = int((frameHeight/2)-50)
+    x2 = int((frameWidth/2)+50)
+    y2 = int((frameHeight/2)+50)
+    cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),1)
+
+    return img
 
 
 
@@ -130,13 +169,13 @@ doMove("MOVEUP")
 
 while True:
     img = frame_read.frame
+    img = cv2.flip(img,0)
+
     battery = tello.get_battery()
     if (battery < minBattery) :
         print ("Battery "+ str(battery) + "% => landing")
         doMove('LAND')
-    text = "Battery: {}%".format(battery)
-    cv2.putText(img, text, (5, 720 - 5),
-        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+    img = setMarkers(img,battery)
     x,y,radius =  findColor(img,lower_color,upper_color)
 
     print("x:"+ str(x) + " y:"+ str(y) + "radius:" + str(radius))
@@ -156,13 +195,13 @@ while True:
     
     command = "K"
  
-    if (y < (frameHeight/2 + 100)  and validObject == True) :
-        command = "F"
-    if (y > (frameHeight/2 - 100)  and validObject == True):
+    if (y < (frameHeight/2 - marge)  and validObject == True) :
         command = "B"
-    if (x < (frameWidth/2 - 100) and (y<(frameHeight/2 + 100) and y>(frameHeight/2 - 100))   and validObject == True):
+    if (y > (frameHeight/2 + marge)  and validObject == True):
+        command = "F"
+    if (x < (frameWidth/2 - marge) and (y<(frameHeight/2 + marge) and y>(frameHeight/2 - marge))   and validObject == True):
         command = "L"
-    if (x > (frameWidth/2 + 100) and (y<(frameHeight/2 + 100) and y>(frameHeight/2 - 100))  and validObject == True):
+    if (x > (frameWidth/2 + marge) and (y<(frameHeight/2 + marge) and y>(frameHeight/2 - marge))  and validObject == True):
         command = "R"
 
     doMove(command)
