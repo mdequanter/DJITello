@@ -2,6 +2,7 @@
 # Based on the color you select, the Tello Edu will keep that object in the middle of your camera
 # If possible use a mirror
 # When starting the script the Tello will takeoff, pressing Ctrl-c to end the script and make it land
+# and the script exit.
 # based on SDK  https://djitellopy.readthedocs.io/en/latest/tello/
 # For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/?ref=shm
 

@@ -1,3 +1,14 @@
+# Selecting a color on a DJI Tello using the stream of the onboard tello camera.
+# select the right color using the HSV values.  Once you isolated your color
+# you can use the values that are printed in the terminal screen to set lower and upper values for your selected color
+# When starting the script the Tello will takeoff, pressing Ctrl-c to end the script and make it land
+# based on SDK  https://djitellopy.readthedocs.io/en/latest/tello/
+# For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/?ref=shm
+
+# author Maarten Dequanter
+# date 21/09/2022
+
+
 import cv2
 import numpy as np
 from djitellopy import Tello
