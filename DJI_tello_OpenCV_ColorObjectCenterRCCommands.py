@@ -1,11 +1,7 @@
-# simple example demonstrating how to control a Tello using your keyboard.
-# For a more fully featured example see manual-control-pygame.py
-# 
-# Use W, A, S, D for moving, E, Q for rotating and R, F for going up and down.
+#  Demonstrating how to control a Tello using the stream of the onboard tello camera.
 # Based on the color you select, the Tello Edu will keep that object in the middle of your camera
 # If possible use a mirror
-# When starting the script the Tello will takeoff, pressing ESC makes it land
-# and the script exit.
+# When starting the script the Tello will takeoff, pressing Ctrl-c to end the script and make it land
 # based on SDK  https://djitellopy.readthedocs.io/en/latest/tello/
 # For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/?ref=shm
 
