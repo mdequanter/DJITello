@@ -38,5 +38,12 @@ For help on OpenCV :  https://www.geeksforgeeks.org/python-programming-language/
 
 ![image](https://user-images.githubusercontent.com/74420584/191464840-a5dcf857-8ad6-4756-80a1-da60b2b0f7a6.png)
 
+# DJI_Tello_getBatteryStatus.py
+Connect to your Tello drone to see it all works and get battery status indication.
+
+# DJI_tello_set_wifi.py
+An easy way to connect your DJI tello drone to your local Wifi Access point or Wifi router
+
+
 
 
