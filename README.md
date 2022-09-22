@@ -50,3 +50,9 @@ Use following code  detect a mission pad and measure distance.  The detection is
 It does not use the camera, so the camera is free to use for other stuff
 a guide can be found on :  https://dl-cdn.ryzerobotics.com/downloads/Tello/Tello%20Mission%20Pad%20User%20Guide.pdf
 
+# DJI_tello_swarm.py
+Using DJI tello's in swarm configuration
+You can only do this with DJI Tello EDU versions and you need to connect all drones to your local WIFI AP
+based on SDK  https://djitellopy.readthedocs.io/en/latest/swarm/
+
+
