@@ -11,9 +11,9 @@ import time
 # If you have connected directly to your Tello Edu wifi network
 #ipAddess = "192.168.10.1"
 # If you have set your Tello Edu drone to connect to your AP
-ipAddess = "192.168.0.86"
+ipAddess = "192.168.0.85"
 
-tello = Tello()
+tello = Tello(ipAddess)
 tello.connect()
 
 # configure drone
@@ -36,14 +36,14 @@ pad = tello.get_mission_pad_id()
 
 # detect and react to pads until we see pad #1
 while True:
-    tello.move_back(20)
-    tello.move_forward(20)
     pad = tello.get_mission_pad_id()
     distanceX = tello.get_mission_pad_distance_x()
     distanceY = tello.get_mission_pad_distance_y()
     distanceZ = tello.get_mission_pad_distance_z()
     print ("dinstance from pad"+str(pad)+" : x "+str(distanceX)+",y "+str(distanceY),",z "+str(distanceY) ) 
-    
+    print ("fly to mission pad")
+    tello.go_xyz_speed(-distanceX,-distanceY,0,20)
+    tello.land()
 
 # graceful termination
 tello.disable_mission_pads()
