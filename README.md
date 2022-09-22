@@ -44,6 +44,9 @@ Connect to your Tello drone to see it all works and get battery status indicatio
 # DJI_tello_set_wifi.py
 An easy way to connect your DJI tello drone to your local Wifi Access point or Wifi router
 
-
-
+# DJI_missionPad.py
+This code will detect mission pads.
+Use following code  detect a mission pad and measure distance.  The detection is based on an infrared sensor on the Tello
+It does not use the camera, so the camera is free to use for other stuff
+a guide can be found on :  https://dl-cdn.ryzerobotics.com/downloads/Tello/Tello%20Mission%20Pad%20User%20Guide.pdf
 
