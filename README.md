@@ -55,4 +55,5 @@ Using DJI tello's in swarm configuration
 You can only do this with DJI Tello EDU versions and you need to connect all drones to your local WIFI AP
 based on SDK  https://djitellopy.readthedocs.io/en/latest/swarm/
 
-
+#DJI_routeMissionPads.py
+Fly from one missionpad to another
